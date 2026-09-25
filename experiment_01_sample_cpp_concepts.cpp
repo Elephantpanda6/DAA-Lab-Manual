@@ -1,3 +1,12 @@
+/*
+ * EXPERIMENT 01: Sample Programs Using C++ Concepts
+ * Aim: Demonstrate core Object-Oriented Programming (OOP) concepts in C++
+ *      including Encapsulation, Abstraction, Inheritance, and Runtime
+ *      Polymorphism using Smart Pointers (std::unique_ptr).
+ *
+ * Compilation: g++ -std=c++17 -Wall experiment_01_sample_cpp_concepts.cpp -o experiment_01.exe
+ */
+
 #define _USE_MATH_DEFINES
 #include <iostream>
 #include <vector>
@@ -15,7 +24,6 @@ protected:
     std::string shapeName; // Accessible by derived classes
 
 public:
-    // Parameterized Constructor using an initialization list
     Shape(std::string name) : shapeName(name) {}
 
     // Pure Virtual Function making this an Abstract Class
@@ -37,7 +45,6 @@ private:
 public:
     Circle(double r) : Shape("Circle"), radius(r) {}
 
-    // Overriding the pure virtual function
     double calculateArea() const override {
         return M_PI * radius * radius;
     }

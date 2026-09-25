@@ -1,3 +1,13 @@
+/*
+ * EXPERIMENT 07: Selection Sort Analysis
+ * Aim: Implement Selection Sort for 10 elements and calculate the total number of
+ *      operations (comparisons and swaps) to analyze empirical complexity.
+ *
+ * Complexity: Time O(n^2), Space O(1)
+ *
+ * Compilation: g++ -std=c++17 -Wall experiment_07_selection_sort_analysis.cpp -o experiment_07.exe
+ */
+
 #include <iostream>
 #include <vector>
 
@@ -18,7 +28,6 @@ void selectionSort(std::vector<int>& arr) {
                 min_idx = j;
             }
         }
-        // Swap if a smaller element was found
         if (min_idx != i) {
             std::swap(arr[i], arr[min_idx]);
             swaps++;
@@ -35,9 +44,7 @@ void selectionSort(std::vector<int>& arr) {
 }
 
 int main() {
-    // 10 elements to sort
     std::vector<int> data = {64, 25, 12, 22, 11, 90, 88, 45, 5, 33};
     selectionSort(data);
-
     return 0;
 }

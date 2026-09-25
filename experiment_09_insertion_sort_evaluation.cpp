@@ -1,3 +1,13 @@
+/*
+ * EXPERIMENT 09: Insertion Sort Evaluation
+ * Aim: Implement Insertion Sort and empirically analyze its time complexity across
+ *      best (sorted), worst (reverse), and average (random) cases.
+ *
+ * Complexity: Best O(n), Average O(n^2), Worst O(n^2), Space O(1)
+ *
+ * Compilation: g++ -std=c++17 -O2 -Wall experiment_09_insertion_sort_evaluation.cpp -o experiment_09.exe
+ */
+
 #include <iostream>
 #include <vector>
 #include <chrono>
@@ -7,13 +17,11 @@
 using namespace std;
 using namespace std::chrono;
 
-// Function to perform Insertion Sort
 void insertionSort(vector<int>& arr) {
     int n = arr.size();
     for (int i = 1; i < n; i++) {
         int key = arr[i];
         int j = i - 1;
-        // Move elements that are greater than key to one position ahead
         while (j >= 0 && arr[j] > key) {
             arr[j + 1] = arr[j];
             j--;
@@ -22,7 +30,6 @@ void insertionSort(vector<int>& arr) {
     }
 }
 
-// Helper function to measure and print execution time
 void evaluateCase(const string& caseName, vector<int> arr) {
     auto start = high_resolution_clock::now();
     insertionSort(arr);
@@ -32,18 +39,13 @@ void evaluateCase(const string& caseName, vector<int> arr) {
 }
 
 int main() {
-    const int SIZE = 10000; // Array size for evaluation
+    const int SIZE = 10000;
     vector<int> bestCase(SIZE);
     vector<int> worstCase(SIZE);
     vector<int> averageCase(SIZE);
 
-    // 1. Best Case: Already sorted array
     for (int i = 0; i < SIZE; i++) bestCase[i] = i;
-
-    // 2. Worst Case: Reverse sorted array
     for (int i = 0; i < SIZE; i++) worstCase[i] = SIZE - i;
-
-    // 3. Average Case: Randomly shuffled array
     for (int i = 0; i < SIZE; i++) averageCase[i] = i;
     auto rng = default_random_engine {};
     shuffle(averageCase.begin(), averageCase.end(), rng);

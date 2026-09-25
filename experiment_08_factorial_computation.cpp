@@ -1,7 +1,16 @@
+/*
+ * EXPERIMENT 08: Factorial Computation (Iterative and Recursive)
+ * Aim: Write both iterative and recursive versions to compute n!; compare their
+ *      runtimes using <chrono> and compare their call-stack depths.
+ *
+ * Complexity: Iterative O(n) time, O(1) space | Recursive O(n) time, O(n) space
+ *
+ * Compilation: g++ -std=c++17 -Wall experiment_08_factorial_computation.cpp -o experiment_08.exe
+ */
+
 #include <iostream>
 #include <chrono>
 
-// Iterative Factorial
 unsigned long long factorialIterative(int n) {
     unsigned long long result = 1;
     for (int i = 1; i <= n; ++i) {
@@ -10,7 +19,6 @@ unsigned long long factorialIterative(int n) {
     return result;
 }
 
-// Recursive Factorial with Stack Depth tracking
 unsigned long long factorialRecursive(int n, int current_depth, int& max_depth) {
     if (current_depth > max_depth) {
         max_depth = current_depth;
@@ -20,12 +28,8 @@ unsigned long long factorialRecursive(int n, int current_depth, int& max_depth) 
 }
 
 int main() {
-    int n;
-    std::cout << "Enter a number to calculate factorial (e.g., 15): ";
-    if (!(std::cin >> n) || n < 0 || n > 20) {
-        std::cout << "Please enter a valid positive integer between 0 and 20 (to prevent 64-bit overflow).\n";
-        return 1;
-    }
+    int n = 15;
+    std::cout << "Factorial Computation for n = " << n << "\n";
 
     // 1. Iterative Execution & Timing
     auto start_iter = std::chrono::high_resolution_clock::now();
@@ -36,16 +40,14 @@ int main() {
     // 2. Recursive Execution & Timing
     int max_stack_depth = 0;
     auto start_recur = std::chrono::high_resolution_clock::now();
-    unsigned long long recur_res = factorialRecursive(n, 1, max_stack_depth); // Starts at depth 1
+    unsigned long long recur_res = factorialRecursive(n, 1, max_stack_depth);
     auto end_recur = std::chrono::high_resolution_clock::now();
     auto duration_recur = std::chrono::duration_cast<std::chrono::nanoseconds>(end_recur - start_recur).count();
 
-    // Outputs
     std::cout << "\nResults:\n";
-    std::cout << "Iterative Result: " << iter_res << " | Time Taken: " << duration_iter << " ns\n";
-    std::cout << "Recursive Result: " << recur_res << " | Time Taken: " << duration_recur << " ns\n";
+    std::cout << "Iterative Result: " << iter_res << " | Time: " << duration_iter << " ns\n";
+    std::cout << "Recursive Result: " << recur_res << " | Time: " << duration_recur << " ns\n";
 
-    // Direct Structural Comparison
     std::cout << "\n--- Direct Performance Comparison ---\n";
     std::cout << "Metric\t\tIterative Version\tRecursive Version\n";
     std::cout << "---------------------------------------------------------\n";
